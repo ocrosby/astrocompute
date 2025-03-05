@@ -1,0 +1,41 @@
+name: Node CI
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+  workflow_dispatch:
+
+env:
+  NODE_VERSION: 'lts/*'
+
+jobs:
+  node_ci:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Cache Node Modules
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-  
+
+      - name: Install Dependencies
+        run: npm install --no-fund
+
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Run Commitlint
+        run: git log -1 --pretty=%B | npx commitlint

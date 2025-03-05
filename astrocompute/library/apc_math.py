@@ -6,9 +6,64 @@ frac and modulo
 
 import math
 
+from enum import Enum
 from typing import Tuple
+from dataclasses import dataclass
+
+class AngleFormat(Enum):
+    Dd = "Dd"
+    DMM = "DMM"
+    DMMm = "DMMm"
+    DMMSS = "DMMSS"
+    DMMSSs = "DMMSSs"
 
 
+@dataclass
+class Angle:
+    def __init__(self, alpha: float, format: AngleFormat=AngleFormat.Dd):
+        self.alpha = alpha
+        self.format = format
+
+    def set(self, format: AngleFormat):
+        self.format = format
+
+
+class AngleSerializer:
+    """
+    AngleSerializer class to serialize and deserialize angles
+    """
+
+    def __init__(self, precision: int = 2, width: int = 12):
+        """
+        Initialize the AngleSerializer
+
+        :param precision:
+        :param width:
+        """
+        self.precision = precision
+        self.width = width
+
+    def serialize(self, angle: Angle) -> str:
+        """
+        Serialize an angle to a string
+
+        :param angle:
+        :return:
+        """
+        d, m, s = dms(angle.alpha)
+        if angle.format == AngleFormat.Dd:
+            return f"{angle.alpha:0.{self.precision}f}"
+        elif angle.format == AngleFormat.DMM:
+            return f"{d} {m:02d}"
+        elif angle.format == AngleFormat.DMMm:
+            decimal_minutes = m + s / 60
+            return f"{d} {decimal_minutes:0.{self.precision}f}"
+        elif angle.format == AngleFormat.DMMSS:
+            return f"{d} {m:02d} {int(s):02d}"
+        elif angle.format == AngleFormat.DMMSSs:
+            return f"{d} {m:02d} {s:0.{self.precision}f}"
+        else:
+            raise ValueError("Invalid AngleFormat")
 def frac(x: float) -> float:
     """
     Calculate the fractional part of x

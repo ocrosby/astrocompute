@@ -1,0 +1,46 @@
+name: Python Lint
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+  workflow_dispatch:
+
+jobs:
+  lint:
+    runs-on: ubuntu-24.04
+    container:
+      image: python:3.13
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('pyproject.toml') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Create virtual environment
+        run: |
+          python3 -m venv venv
+        shell: bash
+
+      - name: Install Python Dependencies
+        run: |
+          source venv/bin/activate
+          python3 -m pip install --upgrade pip
+          python3 -m pip install flit invoke
+          FLIT_ROOT_INSTALL=1 invoke install
+        shell: bash
+
+      - name: Run lint checks
+        run: |
+          source venv/bin/activate
+          invoke lint
+        shell: bash

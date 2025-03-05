@@ -1,7 +1,21 @@
 import pytest
 
-from astrocompute.library.apc_math import frac, modulo, ddd, dms
+from astrocompute.library.apc_math import frac, modulo, ddd, dms, Angle, AngleFormat, AngleSerializer
 
+
+@pytest.mark.parametrize(
+    "angle, expected",
+    [
+        (Angle(12.3456, AngleFormat.Dd), "12.35"),
+        (Angle(12.3456, AngleFormat.DMM), "12 21"),
+        (Angle(12.3456, AngleFormat.DMMm), "12 20.74"),
+        (Angle(12.3456, AngleFormat.DMMSS), "12 20 44"),
+        (Angle(12.3456, AngleFormat.DMMSSs), "12 20 44.16"),
+    ]
+)
+def test_angle_serializer(angle, expected):
+    serializer = AngleSerializer(precision=2, width=12)
+    assert serializer.serialize(angle) == expected
 
 @pytest.mark.parametrize(
     "input, expected",

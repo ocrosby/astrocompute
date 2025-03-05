@@ -1,0 +1,50 @@
+name: Test
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('pyproject.toml') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Create virtual environment
+        run: |
+          python3 -m venv venv
+        shell: bash
+
+      - name: Install Python Dependencies
+        run: |
+          source venv/bin/activate
+          python3 -m pip install --upgrade pip
+          python3 -m pip install flit invoke
+          FLIT_ROOT_INSTALL=1 invoke install
+        shell: bash
+          
+
+      - name: Run Unit Tests
+        run: |
+          source venv/bin/activate
+          invoke test
+        shell: bash
