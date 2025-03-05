@@ -1,6 +1,14 @@
 import pytest
 
-from astrocompute.library.apc_math import frac, modulo, ddd, dms, Angle, AngleFormat, AngleSerializer
+from astrocompute.library.apc_math import (
+    Angle,
+    AngleFormat,
+    AngleSerializer,
+    ddd,
+    dms,
+    frac,
+    modulo,
+)
 
 
 @pytest.mark.parametrize(
@@ -11,11 +19,12 @@ from astrocompute.library.apc_math import frac, modulo, ddd, dms, Angle, AngleFo
         (Angle(12.3456, AngleFormat.DMMm), "12 20.74"),
         (Angle(12.3456, AngleFormat.DMMSS), "12 20 44"),
         (Angle(12.3456, AngleFormat.DMMSSs), "12 20 44.16"),
-    ]
+    ],
 )
 def test_angle_serializer(angle, expected):
     serializer = AngleSerializer(precision=2, width=12)
     assert serializer.serialize(angle) == expected
+
 
 @pytest.mark.parametrize(
     "input, expected",
@@ -46,17 +55,19 @@ def test_modulo_zero_division(x, y):
     with pytest.raises(ZeroDivisionError):
         modulo(x, y)
 
+
 @pytest.mark.parametrize(
     "d, m, s, expected",
     [
         (15, 30, 0.0, 15.50000),
         (-8, 9, 10.0, -8.15278),
         (0, 1, 0.0, 0.01667),
-        (0,-5,0.0,-0.08334)
-    ]
+        (0, -5, 0.0, -0.08334),
+    ],
 )
 def test_ddd(d, m, s, expected):
     assert ddd(d, m, s) == pytest.approx(expected, abs=1e-5)
+
 
 @pytest.mark.parametrize(
     "dd, expected",
@@ -65,8 +76,8 @@ def test_ddd(d, m, s, expected):
         (-8.15278, (-8, 9, 10.0)),
         (0.01667, (0, 1, 0.0)),
         (-0.08334, (0, -5, 0.0)),
-        (-0.00333, (0, 0, -12.0))
-    ]
+        (-0.00333, (0, 0, -12.0)),
+    ],
 )
 def test_dms(dd, expected):
     """

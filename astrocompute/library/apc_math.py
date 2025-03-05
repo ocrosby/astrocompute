@@ -5,27 +5,29 @@ frac and modulo
 """
 
 import math
-
+from dataclasses import dataclass
 from enum import Enum
 from typing import Tuple
-from dataclasses import dataclass
+
 
 class AngleFormat(Enum):
-    Dd = "Dd"
+    Dd = "Dd"  # pylint: disable=invalid-name
     DMM = "DMM"
-    DMMm = "DMMm"
+    DMMm = "DMMm"  # pylint: disable=invalid-name
     DMMSS = "DMMSS"
-    DMMSSs = "DMMSSs"
+    DMMSSs = "DMMSSs"  # pylint: disable=invalid-name
 
 
 @dataclass
 class Angle:
-    def __init__(self, alpha: float, format: AngleFormat=AngleFormat.Dd):
+    def __init__(
+        self, alpha: float, angle_format: AngleFormat = AngleFormat.Dd
+    ):
         self.alpha = alpha
-        self.format = format
+        self.format = angle_format
 
-    def set(self, format: AngleFormat):
-        self.format = format
+    def set(self, angle_format: AngleFormat):
+        self.format = angle_format
 
 
 class AngleSerializer:
@@ -64,6 +66,8 @@ class AngleSerializer:
             return f"{d} {m:02d} {s:0.{self.precision}f}"
         else:
             raise ValueError("Invalid AngleFormat")
+
+
 def frac(x: float) -> float:
     """
     Calculate the fractional part of x
@@ -91,6 +95,7 @@ def modulo(x: float, y: float) -> float:
     """
     return y * frac(x / y)
 
+
 def ddd(d: int, m: int, s: float) -> float:
     """
     Convert degrees, minutes, seconds to decimal degrees
@@ -101,7 +106,10 @@ def ddd(d: int, m: int, s: float) -> float:
     :return: Angle in decimal representation
     """
     sign = -1.0 if d < 0 or m < 0 or s < 0 else 1.0
-    return sign * (abs(float(d)) + abs(float(m))/60.0 + abs(float(s))/3600.0)
+    return sign * (
+        abs(float(d)) + abs(float(m)) / 60.0 + abs(float(s)) / 3600.0
+    )
+
 
 def dms(dd: float) -> Tuple[int, int, float]:
     """

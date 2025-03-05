@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 
+
 @dataclass
 class Vec3D:
     x: float
@@ -8,35 +9,43 @@ class Vec3D:
 
     def __add__(self, other):
         if not isinstance(other, Vec3D):
-            raise TypeError(f'unsupported operand type(s) for +: {type(self)} and {type(other)}')
+            raise TypeError(
+                f"unsupported operand type(s) for +: {type(self)} and {type(other)}"
+            )
 
         return Vec3D(self.x + other.x, self.y + other.y, self.z + other.z)
 
     def __sub__(self, other):
         if not isinstance(other, Vec3D):
-            raise TypeError(f'unsupported operand type(s) for +: {type(self)} and {type(other)}')
+            raise TypeError(
+                f"unsupported operand type(s) for +: {type(self)} and {type(other)}"
+            )
 
         return Vec3D(self.x - other.x, self.y - other.y, self.z - other.z)
 
     def __mul__(self, other):
         if not isinstance(other, (int, float)):
-            raise TypeError(f'unsupported operand type(s) for *: {type(self)} and {type(other)}')
+            raise TypeError(
+                f"unsupported operand type(s) for *: {type(self)} and {type(other)}"
+            )
 
         return Vec3D(self.x * other, self.y * other, self.z * other)
 
     def __truediv__(self, other):
         if not isinstance(other, (int, float)):
-            raise TypeError(f'unsupported operand type(s) for /: {type(self)} and {type(other)}')
+            raise TypeError(
+                f"unsupported operand type(s) for /: {type(self)} and {type(other)}"
+            )
 
         return Vec3D(self.x / other, self.y / other, self.z / other)
 
     def __str__(self):
-        return f'({self.x}, {self.y}, {self.z})'
+        return f"({self.x}, {self.y}, {self.z})"
 
     def norm(self) -> float:
-        return (self.x**2 + self.y**2 + self.z**2)**0.5
+        return (self.x**2 + self.y**2 + self.z**2) ** 0.5
 
-    def normalize(self) -> 'Vec3D':
+    def normalize(self) -> "Vec3D":
         n = self.norm()
         return Vec3D(self.x / n, self.y / n, self.z / n)
 
@@ -51,6 +60,7 @@ def add(v1: Vec3D, v2: Vec3D) -> Vec3D:
     """
     return v1 + v2
 
+
 def scalar_multiply_vec3d(scalar: float, vec3: Vec3D) -> Vec3D:
     """
     Multiplies a 3 dimensional vector by a scalar.
@@ -60,6 +70,7 @@ def scalar_multiply_vec3d(scalar: float, vec3: Vec3D) -> Vec3D:
     :return: Result of the scalar multiplication
     """
     return Vec3D(vec3.x * scalar, vec3.y * scalar, vec3.z * scalar)
+
 
 def dot_product(v1: Vec3D, v2: Vec3D) -> float:
     """
@@ -71,6 +82,7 @@ def dot_product(v1: Vec3D, v2: Vec3D) -> float:
     """
     return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z
 
+
 def cross_product(v1: Vec3D, v2: Vec3D) -> Vec3D:
     """
     Calculates the cross product of two 3 dimensional vectors.
@@ -78,9 +90,12 @@ def cross_product(v1: Vec3D, v2: Vec3D) -> Vec3D:
     :param v2: Second vector
     :return: Cross product of the two vectors
     """
-    return Vec3D(v1.y * v2.z - v1.z * v2.y,
-                 v1.z * v2.x - v1.x * v2.z,
-                 v1.x * v2.y - v1.y * v2.x)
+    return Vec3D(
+        v1.y * v2.z - v1.z * v2.y,
+        v1.z * v2.x - v1.x * v2.z,
+        v1.x * v2.y - v1.y * v2.x,
+    )
+
 
 def norm(v: Vec3D) -> float:
     """
@@ -89,7 +104,8 @@ def norm(v: Vec3D) -> float:
     :param v: Vector
     :return: Norm of the vector
     """
-    return (v.x**2 + v.y**2 + v.z**2)**0.5
+    return (v.x**2 + v.y**2 + v.z**2) ** 0.5
+
 
 def normalize(v: Vec3D) -> Vec3D:
     """
