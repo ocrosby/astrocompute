@@ -1,0 +1,12 @@
+# Include specific directories
+recursive-include astrocompute *
+
+# Exclude unnecessary directories
+prune tests
+prune docs
+prune htmlcov
+prune node_modules
+prune .github
+prune .husky
+prune venv
+prune .venv
