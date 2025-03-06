@@ -48,3 +48,8 @@ jobs:
           source venv/bin/activate
           invoke test
         shell: bash
+
+      - name: Report Coverage
+        uses: coverallsapp/github-action@v2
+        with:
+          github-token: ${{ secrets.GH_TOKEN }}
