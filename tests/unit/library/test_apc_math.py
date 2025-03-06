@@ -29,13 +29,7 @@ def test_angle_serializer(angle, expected):
 
 @pytest.mark.parametrize(
     "input, expected",
-    [
-        (5.75, 0.75),
-        (-5.75, 0.75),
-        (0, 0),
-        (1.0, 0.0),
-        (-1.0, 0.0)
-    ],
+    [(5.75, 0.75), (-5.75, 0.75), (0, 0), (1.0, 0.0), (-1.0, 0.0)],
 )
 def test_frac(input, expected):
     assert frac(input) == expected

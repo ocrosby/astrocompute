@@ -10,8 +10,6 @@ from enum import Enum
 from typing import Tuple
 
 
-
-
 class AngleFormat(Enum):
     Dd = "Dd"  # pylint: disable=invalid-name
     DMM = "DMM"
