@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/ocrosby/astrocompute/compare/v1.0.0...v1.0.1) (2025-03-06)
+
+
+### Bug Fixes
+
+* source the virtual environment for access to build tools ([5fc236f](https://github.com/ocrosby/astrocompute/commit/5fc236fe3567687b03bc711e33a94915757cd844))
+
 # 1.0.0 (2025-03-06)
 
 
