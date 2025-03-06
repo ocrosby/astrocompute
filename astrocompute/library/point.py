@@ -134,6 +134,21 @@ class Point2D:
         """
         return (r.y - p.y) * (q.x - p.x) == (q.y - p.y) * (r.x - p.x)
 
+    @staticmethod
+    def create_from_coordinates(x: float, y: float) -> 'Point2D':
+        return Point2D(x, y)
+
+    @staticmethod
+    def create_from_coordinate_str(repr_str: str) -> 'Point2D':
+        return Point2D.parse(repr_str)
+
+    @staticmethod
+    def create_from_polar_coordinates(r: float, theta: float) -> 'Point2D':
+        x = r * math.cos(theta)
+        y = r * math.sin(theta)
+        return Point2D(x, y)
+
+
 
 @dataclass
 class Point3D:
@@ -237,6 +252,14 @@ class Point3D:
         # If the determinant is 0, the points are cocircular
         return determinant == 0
 
+    @staticmethod
+    def create_from_coordinates(x: float, y: float, z: float) -> 'Point3D':
+        return Point3D(x, y, z)
+
+    @staticmethod
+    def create_from_coordinate_str(repr_str: str) -> 'Point3D':
+        return Point3D.parse(repr_str)
+
 
 def parse_point(repr_str: str) -> Union[Point2D, Point3D]:
     """
@@ -253,3 +276,18 @@ def parse_point(repr_str: str) -> Union[Point2D, Point3D]:
         return Point3D.parse(repr_str)
 
     raise ValueError(f"Unknown point representation: {repr_str}")
+
+
+
+def create_point(x: float, y: float, z: float = 0) -> Union[Point2D, Point3D]:
+    """
+    Create a Point2D or Point3D object from the given coordinates.
+
+    :param x: The x-coordinate
+    :param y: The y-coordinate
+    :param z: The z-coordinate (default: 0)
+    :return: Point2D or Point3D object
+    """
+    if z == 0:
+        return Point2D(x, y)
+    return Point3D(x, y, z)
