@@ -15,14 +15,14 @@ permissions:
 
 env:
   NODE_VERSION: 'lts/*'
-  PYTHON_VERSION: '3.12'
+  PYTHON_VERSION: '3.13'
 
 jobs:
   release:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
     container:
-      image: python:3.12
+      image: python:3.13
 
     steps:
       - name: Checkout repository
@@ -80,17 +80,21 @@ jobs:
           source venv/bin/activate
           set -e  # Stop on the first error
           npx semantic-release || echo "semantic-release failed with exit code $?"
-          echo "version_changed=${{ steps.semantic_release.outputs.version_changed }}"
         shell: bash
+
+      - name: Check if a release is needed
+        run: |
+          echo "version_changed=${{ steps.semantic_release.outputs.version_changed }}"
+          echo "outcome=${{ steps.semantic_release.outcome }}"        
 
       - name: Conditionally Build and Deploy Package
         if: steps.semantic_release.outcome == 'success' && steps.semantic_release.outputs.version_changed == 'true'
         env:
-          ARTIFACTORY_USER: ${{ secrets.ARTIFACTORY_USER }}
-          ARTIFACTORY_TOKEN: ${{ secrets.ARTIFACTORY_TOKEN }}
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
         run: |
-          source venv/bin/activate
-          invoke build
-          echo "Deploying to Artifactory URL: $ARTIFACTORY_URL"
-          python -m twine upload --repository-url $ARTIFACTORY_URL --non-interactive --verbose --username $ARTIFACTORY_USER --password $ARTIFACTORY_TOKEN dist/*
-        shell: bash
+            python3 -m pip install --upgrade pip
+            python3 -m pip install twine invoke
+            invoke build
+            echo "Deploying to PyPI..."
+            python3 -m twine upload --repository pypi dist/*

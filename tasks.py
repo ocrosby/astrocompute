@@ -105,6 +105,7 @@ def install(c: Context, prod: bool = False):
     """Install dependencies."""
     c.run('pip install --upgrade "pip>=21.3"')
     c.run("pip install flit")
+    c.run("pip install build")
 
     if prod:
         print("Installing production dependencies ...")
@@ -128,10 +129,10 @@ def build(c: Context):
     print("Building the package...")
 
     # Build a source distribution
-    c.run("python3 -m build --sdist")
+    c.run("python -m build --sdist")
 
     # Build a wheel
-    c.run("python3 -m build --wheel")
+    c.run("python -m build --wheel")
 
     print("Build complete. The distribution files are in the dist/ directory.")
 
