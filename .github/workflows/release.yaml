@@ -77,13 +77,10 @@ jobs:
           DEBUG: semantic-release:*
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
-          pwd
-          ls -la
           source venv/bin/activate
           set -e  # Stop on the first error
           npx semantic-release
         shell: bash
-        working-directory: /__w/astrocompute/astrocompute
 
       - name: Check if a release is needed
         run: |
@@ -96,8 +93,7 @@ jobs:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
         run: |
-            python3 -m pip install --upgrade pip
-            python3 -m pip install twine invoke
-            invoke build
             echo "Deploying to PyPI..."
+            source venv/bin/activate            
             python3 -m twine upload --repository pypi dist/*
+        shell: bash
