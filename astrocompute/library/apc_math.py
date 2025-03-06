@@ -83,10 +83,7 @@ def frac(x: float) -> float:
     :rtype: float
     :raises: ZeroDivisionError
     """
-    floor_value = math.floor(x)
-    difference = x - floor_value
-
-    return difference
+    return abs(x) - abs(int(x))
 
 
 def modulo(x: float, y: float) -> float:
