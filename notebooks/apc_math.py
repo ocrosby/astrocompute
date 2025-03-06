@@ -7,6 +7,7 @@ app = marimo.App(width="medium")
 @app.cell
 def _():
     import marimo as mo
+
     return (mo,)
 
 
@@ -22,7 +23,12 @@ def _(mo):
 
 @app.cell
 def _():
-    from astrocompute.library.apc_math import Angle, AngleFormat, AngleSerializer
+    from astrocompute.library.apc_math import (
+        Angle,
+        AngleFormat,
+        AngleSerializer,
+    )
+
     return Angle, AngleFormat, AngleSerializer
 
 

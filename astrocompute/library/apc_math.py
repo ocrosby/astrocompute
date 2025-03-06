@@ -10,6 +10,8 @@ from enum import Enum
 from typing import Tuple
 
 
+
+
 class AngleFormat(Enum):
     Dd = "Dd"  # pylint: disable=invalid-name
     DMM = "DMM"
@@ -55,17 +57,21 @@ class AngleSerializer:
         d, m, s = dms(angle.alpha)
         if angle.format == AngleFormat.Dd:
             return f"{angle.alpha:0.{self.precision}f}"
-        elif angle.format == AngleFormat.DMM:
+
+        if angle.format == AngleFormat.DMM:
             return f"{d} {m:02d}"
-        elif angle.format == AngleFormat.DMMm:
+
+        if angle.format == AngleFormat.DMMm:
             decimal_minutes = m + s / 60
             return f"{d} {decimal_minutes:0.{self.precision}f}"
-        elif angle.format == AngleFormat.DMMSS:
+
+        if angle.format == AngleFormat.DMMSS:
             return f"{d} {m:02d} {int(s):02d}"
-        elif angle.format == AngleFormat.DMMSSs:
+
+        if angle.format == AngleFormat.DMMSSs:
             return f"{d} {m:02d} {s:0.{self.precision}f}"
-        else:
-            raise ValueError("Invalid AngleFormat")
+
+        raise ValueError("Invalid AngleFormat")
 
 
 def frac(x: float) -> float:
