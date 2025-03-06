@@ -4,7 +4,6 @@ The module apc_math.py provides (among others) the two functions:
 frac and modulo
 """
 
-import math
 from dataclasses import dataclass
 from enum import Enum
 from typing import Tuple
