@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/ocrosby/astrocompute/compare/v1.0.1...v1.0.2) (2025-03-06)
+
+
+### Bug Fixes
+
+* build the distribution before upload ([6a43df4](https://github.com/ocrosby/astrocompute/commit/6a43df4709297968f934a3c454ebeffb85220051))
+
 ## [1.0.1](https://github.com/ocrosby/astrocompute/compare/v1.0.0...v1.0.1) (2025-03-06)
 
 
