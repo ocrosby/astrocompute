@@ -116,10 +116,8 @@ jobs:
       - commitlint
       - lint
 
-    strategy:
-      fail-fast: true
-      matrix:
-        python-version: ['3.12', '3.13']
+    env:
+      PYTHON_VERSION: '3.13'
 
     steps:
       - name: Checkout repository
@@ -128,7 +126,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: ${{ env.PYTHON_VERSION }}
 
       - name: Cache pip
         uses: actions/cache@v4
