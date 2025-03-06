@@ -75,6 +75,12 @@ def test(c: Context):
 
 
 @task(aliases=["v"])
+def coverage(c):
+    """Runs PyTest unit and integration tests with coverage."""
+    c.run("coverage run -m pytest tests/unit")
+    c.run("coverage lcov -o ./coverage/lcov.info")
+
+@task(aliases=["v"])
 def coverage(c: Context) -> None:
     """Run tests with coverage."""
     c.run("echo 'Running tests with coverage ...'")
