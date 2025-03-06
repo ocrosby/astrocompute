@@ -79,6 +79,7 @@ jobs:
         run: |
           source venv/bin/activate
           set -e  # Stop on the first error
+          cd /__w/astrocompute/astrocompute  # Ensure the working directory is set correctly
           npx semantic-release
         shell: bash
 
