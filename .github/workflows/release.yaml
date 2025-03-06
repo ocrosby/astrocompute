@@ -79,7 +79,7 @@ jobs:
         run: |
           source venv/bin/activate
           set -e  # Stop on the first error
-          npx semantic-release || echo "semantic-release failed with exit code $?"
+          npx semantic-release
         shell: bash
 
       - name: Check if a release is needed
