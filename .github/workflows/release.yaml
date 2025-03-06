@@ -77,6 +77,8 @@ jobs:
           DEBUG: semantic-release:*
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
+          pwd
+          ls -la
           source venv/bin/activate
           set -e  # Stop on the first error
           npx semantic-release
