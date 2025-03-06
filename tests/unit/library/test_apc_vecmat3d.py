@@ -1,6 +1,6 @@
 import pytest
 
-from astrocompute.library.apc_vecmat3d import (
+from astrocompute.library.vector3d import (
     add,
     cross_product,
     dot_product,
@@ -8,15 +8,15 @@ from astrocompute.library.apc_vecmat3d import (
     normalize,
     scalar_multiply,
 )
-from astrocompute.models.vec3d import Vec3D
+from astrocompute.models.vector import Vector3D
 
 
 @pytest.mark.parametrize(
     "u, v, expected",
     [
-        (Vec3D(1, 2, 3), Vec3D(4, 5, 6), Vec3D(5, 7, 9)),
-        (Vec3D(-1, -2, -3), Vec3D(1, 2, 3), Vec3D(0, 0, 0)),
-        (Vec3D(0, 0, 0), Vec3D(0, 0, 0), Vec3D(0, 0, 0)),
+        (Vector3D(1, 2, 3), Vector3D(4, 5, 6), Vector3D(5, 7, 9)),
+        (Vector3D(-1, -2, -3), Vector3D(1, 2, 3), Vector3D(0, 0, 0)),
+        (Vector3D(0, 0, 0), Vector3D(0, 0, 0), Vector3D(0, 0, 0)),
     ],
 )
 def test_add(u, v, expected):
@@ -33,8 +33,8 @@ def test_add(u, v, expected):
 @pytest.mark.parametrize(
     "u, v",
     [
-        (None, Vec3D(1, 2, 3)),
-        (Vec3D(1, 2, 3), None),
+        (None, Vector3D(1, 2, 3)),
+        (Vector3D(1, 2, 3), None),
     ],
 )
 def test_add_value_error(u, v):
@@ -48,9 +48,9 @@ def test_add_value_error(u, v):
 @pytest.mark.parametrize(
     "s, v, expected",
     [
-        (2, Vec3D(1, 2, 3), Vec3D(2, 4, 6)),
-        (-1, Vec3D(1, 2, 3), Vec3D(-1, -2, -3)),
-        (0, Vec3D(1, 2, 3), Vec3D(0, 0, 0)),
+        (2, Vector3D(1, 2, 3), Vector3D(2, 4, 6)),
+        (-1, Vector3D(1, 2, 3), Vector3D(-1, -2, -3)),
+        (0, Vector3D(1, 2, 3), Vector3D(0, 0, 0)),
     ],
 )
 def test_scalar_multiply(s, v, expected):
@@ -75,8 +75,8 @@ def test_scalar_multiply_value_error():
 @pytest.mark.parametrize(
     "u, v",
     [
-        (None, Vec3D(1, 2, 3)),
-        (Vec3D(1, 2, 3), None),
+        (None, Vector3D(1, 2, 3)),
+        (Vector3D(1, 2, 3), None),
     ],
 )
 def test_add_value_error(u, v):
@@ -90,9 +90,9 @@ def test_add_value_error(u, v):
 @pytest.mark.parametrize(
     "u, v, expected",
     [
-        (Vec3D(1, 2, 3), Vec3D(4, 5, 6), 32),
-        (Vec3D(-1, -2, -3), Vec3D(1, 2, 3), -14),
-        (Vec3D(0, 0, 0), Vec3D(1, 2, 3), 0),
+        (Vector3D(1, 2, 3), Vector3D(4, 5, 6), 32),
+        (Vector3D(-1, -2, -3), Vector3D(1, 2, 3), -14),
+        (Vector3D(0, 0, 0), Vector3D(1, 2, 3), 0),
     ],
 )
 def test_dot_product(u, v, expected):
@@ -109,8 +109,8 @@ def test_dot_product(u, v, expected):
 @pytest.mark.parametrize(
     "u, v",
     [
-        (None, Vec3D(1, 2, 3)),
-        (Vec3D(1, 2, 3), None),
+        (None, Vector3D(1, 2, 3)),
+        (Vector3D(1, 2, 3), None),
     ],
 )
 def test_dot_product_value_error(u, v):
@@ -124,9 +124,9 @@ def test_dot_product_value_error(u, v):
 @pytest.mark.parametrize(
     "u, v, expected",
     [
-        (Vec3D(1, 2, 3), Vec3D(4, 5, 6), Vec3D(-3, 6, -3)),
-        (Vec3D(1, 0, 0), Vec3D(0, 1, 0), Vec3D(0, 0, 1)),
-        (Vec3D(0, 0, 0), Vec3D(1, 2, 3), Vec3D(0, 0, 0)),
+        (Vector3D(1, 2, 3), Vector3D(4, 5, 6), Vector3D(-3, 6, -3)),
+        (Vector3D(1, 0, 0), Vector3D(0, 1, 0), Vector3D(0, 0, 1)),
+        (Vector3D(0, 0, 0), Vector3D(1, 2, 3), Vector3D(0, 0, 0)),
     ],
 )
 def test_cross_product(u, v, expected):
@@ -143,8 +143,8 @@ def test_cross_product(u, v, expected):
 @pytest.mark.parametrize(
     "u, v",
     [
-        (None, Vec3D(1, 2, 3)),
-        (Vec3D(1, 2, 3), None),
+        (None, Vector3D(1, 2, 3)),
+        (Vector3D(1, 2, 3), None),
     ],
 )
 def test_cross_product_value_error(u, v):
@@ -158,9 +158,9 @@ def test_cross_product_value_error(u, v):
 @pytest.mark.parametrize(
     "v, expected",
     [
-        (Vec3D(1, 2, 2), 3),
-        (Vec3D(0, 0, 0), 0),
-        (Vec3D(-1, -2, -2), 3),
+        (Vector3D(1, 2, 2), 3),
+        (Vector3D(0, 0, 0), 0),
+        (Vector3D(-1, -2, -2), 3),
     ],
 )
 def test_norm(v, expected):
@@ -186,8 +186,8 @@ def test_norm_zero_vector():
 @pytest.mark.parametrize(
     "v, expected",
     [
-        (Vec3D(1, 2, 2), Vec3D(1 / 3, 2 / 3, 2 / 3)),
-        (Vec3D(-1, -2, -2), Vec3D(-1 / 3, -2 / 3, -2 / 3)),
+        (Vector3D(1, 2, 2), Vector3D(1 / 3, 2 / 3, 2 / 3)),
+        (Vector3D(-1, -2, -2), Vector3D(-1 / 3, -2 / 3, -2 / 3)),
     ],
 )
 def test_normalize(v, expected):
@@ -206,7 +206,7 @@ def test_normalize_zero_vector():
     Test the normalize function with a zero vector.
     """
     # Arrange
-    v = Vec3D(0, 0, 0)
+    v = Vector3D(0, 0, 0)
 
     # Act & Assert
     with pytest.raises(ZeroDivisionError):
@@ -216,9 +216,9 @@ def test_normalize_zero_vector():
 @pytest.mark.parametrize(
     "v1, v2, expected",
     [
-        (Vec3D(1, 2, 3), Vec3D(4, 5, 6), Vec3D(5, 7, 9)),
-        (Vec3D(-1, -2, -3), Vec3D(1, 2, 3), Vec3D(0, 0, 0)),
-        (Vec3D(0, 0, 0), Vec3D(0, 0, 0), Vec3D(0, 0, 0)),
+        (Vector3D(1, 2, 3), Vector3D(4, 5, 6), Vector3D(5, 7, 9)),
+        (Vector3D(-1, -2, -3), Vector3D(1, 2, 3), Vector3D(0, 0, 0)),
+        (Vector3D(0, 0, 0), Vector3D(0, 0, 0), Vector3D(0, 0, 0)),
     ],
 )
 def test_vec3d_add(v1, v2, expected):
@@ -228,9 +228,9 @@ def test_vec3d_add(v1, v2, expected):
 @pytest.mark.parametrize(
     "v1, v2, expected",
     [
-        (Vec3D(1, 2, 3), Vec3D(4, 5, 6), Vec3D(-3, -3, -3)),
-        (Vec3D(-1, -2, -3), Vec3D(1, 2, 3), Vec3D(-2, -4, -6)),
-        (Vec3D(0, 0, 0), Vec3D(0, 0, 0), Vec3D(0, 0, 0)),
+        (Vector3D(1, 2, 3), Vector3D(4, 5, 6), Vector3D(-3, -3, -3)),
+        (Vector3D(-1, -2, -3), Vector3D(1, 2, 3), Vector3D(-2, -4, -6)),
+        (Vector3D(0, 0, 0), Vector3D(0, 0, 0), Vector3D(0, 0, 0)),
     ],
 )
 def test_vec3d_sub(v1, v2, expected):
@@ -240,9 +240,9 @@ def test_vec3d_sub(v1, v2, expected):
 @pytest.mark.parametrize(
     "v, scalar, expected",
     [
-        (Vec3D(1, 2, 3), 2, Vec3D(2, 4, 6)),
-        (Vec3D(-1, -2, -3), -1, Vec3D(1, 2, 3)),
-        (Vec3D(0, 0, 0), 5, Vec3D(0, 0, 0)),
+        (Vector3D(1, 2, 3), 2, Vector3D(2, 4, 6)),
+        (Vector3D(-1, -2, -3), -1, Vector3D(1, 2, 3)),
+        (Vector3D(0, 0, 0), 5, Vector3D(0, 0, 0)),
     ],
 )
 def test_vec3d_mul(v, scalar, expected):
@@ -252,9 +252,9 @@ def test_vec3d_mul(v, scalar, expected):
 @pytest.mark.parametrize(
     "v, scalar, expected",
     [
-        (Vec3D(2, 4, 6), 2, Vec3D(1, 2, 3)),
-        (Vec3D(-1, -2, -3), -1, Vec3D(1, 2, 3)),
-        (Vec3D(0, 0, 0), 5, Vec3D(0, 0, 0)),
+        (Vector3D(2, 4, 6), 2, Vector3D(1, 2, 3)),
+        (Vector3D(-1, -2, -3), -1, Vector3D(1, 2, 3)),
+        (Vector3D(0, 0, 0), 5, Vector3D(0, 0, 0)),
     ],
 )
 def test_vec3d_truediv(v, scalar, expected):
@@ -263,15 +263,15 @@ def test_vec3d_truediv(v, scalar, expected):
 
 def test_vec3d_truediv_zero_division():
     with pytest.raises(ZeroDivisionError):
-        Vec3D(1, 2, 3) / 0
+        Vector3D(1, 2, 3) / 0
 
 
 @pytest.mark.parametrize(
     "v, expected",
     [
-        (Vec3D(1, 2, 2), 3),
-        (Vec3D(0, 0, 0), 0),
-        (Vec3D(-1, -2, -2), 3),
+        (Vector3D(1, 2, 2), 3),
+        (Vector3D(0, 0, 0), 0),
+        (Vector3D(-1, -2, -2), 3),
     ],
 )
 def test_vec3d_norm(v, expected):
@@ -281,9 +281,9 @@ def test_vec3d_norm(v, expected):
 @pytest.mark.parametrize(
     "v, expected",
     [
-        (Vec3D(1, 2, 2), Vec3D(1 / 3, 2 / 3, 2 / 3)),
-        (Vec3D(0, 0, 0), Vec3D(0, 0, 0)),
-        (Vec3D(-1, -2, -2), Vec3D(-1 / 3, -2 / 3, -2 / 3)),
+        (Vector3D(1, 2, 2), Vector3D(1 / 3, 2 / 3, 2 / 3)),
+        (Vector3D(0, 0, 0), Vector3D(0, 0, 0)),
+        (Vector3D(-1, -2, -2), Vector3D(-1 / 3, -2 / 3, -2 / 3)),
     ],
 )
 def test_vec3d_normalize(v, expected):
@@ -295,5 +295,5 @@ def test_vec3d_normalize(v, expected):
 
 
 def test_vec3d_str():
-    v = Vec3D(1, 2, 3)
+    v = Vector3D(1, 2, 3)
     assert str(v) == "(1, 2, 3)"

@@ -23,7 +23,7 @@ def _(mo):
 
 @app.cell
 def _():
-    from astrocompute.library.apc_math import (
+    from astrocompute.library.mathmatics import (
         Angle,
         AngleFormat,
         AngleSerializer,

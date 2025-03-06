@@ -1,9 +1,8 @@
 import math
 
-from astrocompute.models.vec3d import Vec3D
+from astrocompute.models.vector import Vector3D
 
-
-def add(u: Vec3D, v: Vec3D) -> Vec3D:
+def add(u: Vector3D, v: Vector3D) -> Vector3D:
     """
     Adds two 3-dimensional vectors.
 
@@ -17,10 +16,10 @@ def add(u: Vec3D, v: Vec3D) -> Vec3D:
     if v is None:
         raise ValueError("v cannot be None")
 
-    return Vec3D(u.x + v.x, u.y + v.y, u.z + v.z)
+    return Vector3D(u.x + v.x, u.y + v.y, u.z + v.z)
 
 
-def scalar_multiply(s: float, v: Vec3D) -> Vec3D:
+def scalar_multiply(s: float, v: Vector3D) -> Vector3D:
     """
     Multiplies a 3 dimensional vector by a scalar.
 
@@ -31,10 +30,10 @@ def scalar_multiply(s: float, v: Vec3D) -> Vec3D:
     if v is None:
         raise ValueError("vector cannot be None")
 
-    return Vec3D(s * v.x, s * v.y, s * v.z)
+    return Vector3D(s * v.x, s * v.y, s * v.z)
 
 
-def dot_product(u: Vec3D, v: Vec3D) -> float:
+def dot_product(u: Vector3D, v: Vector3D) -> float:
     """
     Calculates the dot product of two 3 dimensional vectors.
 
@@ -51,7 +50,7 @@ def dot_product(u: Vec3D, v: Vec3D) -> float:
     return u.x * v.x + u.y * v.y + u.z * v.z
 
 
-def cross_product(u: Vec3D, v: Vec3D) -> Vec3D:
+def cross_product(u: Vector3D, v: Vector3D) -> Vector3D:
     """
     Calculates the cross product of two 3 dimensional vectors.
     :param u: First vector
@@ -64,14 +63,14 @@ def cross_product(u: Vec3D, v: Vec3D) -> Vec3D:
     if v is None:
         raise ValueError("v cannot be None")
 
-    return Vec3D(
+    return Vector3D(
         u.y * v.z - u.z * v.y,
         u.z * v.x - u.x * v.z,
         u.x * v.y - u.y * v.x,
     )
 
 
-def norm(v: Vec3D) -> float:
+def norm(v: Vector3D) -> float:
     """
     Calculates the norm of a 3 dimensional vector.
 
@@ -84,7 +83,7 @@ def norm(v: Vec3D) -> float:
     return math.sqrt(v.x**2 + v.y**2 + v.z**2)
 
 
-def normalize(v: Vec3D) -> Vec3D:
+def normalize(v: Vector3D) -> Vector3D:
     """
     Normalizes a 3 dimensional vector.
     This should return a unit vector in the same direction as the input vector.
@@ -93,4 +92,4 @@ def normalize(v: Vec3D) -> Vec3D:
     :return: Normalized vector
     """
     n = norm(v)
-    return Vec3D(v.x / n, v.y / n, v.z / n)
+    return Vector3D(v.x / n, v.y / n, v.z / n)
