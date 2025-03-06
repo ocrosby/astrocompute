@@ -1,50 +1,73 @@
+import math
+
 from astrocompute.models.vec3d import Vec3D
 
 
-def add(v1: Vec3D, v2: Vec3D) -> Vec3D:
+def add(u: Vec3D, v: Vec3D) -> Vec3D:
     """
-    Adds two 3 dimensional vectors.
+    Adds two 3-dimensional vectors.
 
-    :param v1: First vector
-    :param v2: Second vector
+    :param u: First vector
+    :param v: Second vector
     :return: Sum of the two vectors
     """
-    return v1 + v2
+    if u is None:
+        raise ValueError("u cannot be None")
+
+    if v is None:
+        raise ValueError("v cannot be None")
+
+    return Vec3D(u.x + v.x, u.y + v.y, u.z + v.z)
 
 
-def scalar_multiply_vec3d(scalar: float, vec3: Vec3D) -> Vec3D:
+def scalar_multiply(s: float, v: Vec3D) -> Vec3D:
     """
     Multiplies a 3 dimensional vector by a scalar.
 
-    :param scalar: Scalar value
-    :param vec3: 3 dimensional vector
+    :param s: Scalar value
+    :param v: 3 dimensional vector
     :return: Result of the scalar multiplication
     """
-    return Vec3D(vec3.x * scalar, vec3.y * scalar, vec3.z * scalar)
+    if v is None:
+        raise ValueError("vector cannot be None")
+
+    return Vec3D(s * v.x, s * v.y, s * v.z)
 
 
-def dot_product(v1: Vec3D, v2: Vec3D) -> float:
+def dot_product(u: Vec3D, v: Vec3D) -> float:
     """
     Calculates the dot product of two 3 dimensional vectors.
 
-    :param v1: First vector
-    :param v2: Second vector
+    :param u: First vector
+    :param v: Second vector
     :return: Dot product of the two vectors
     """
-    return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z
+    if u is None:
+        raise ValueError("u cannot be None")
+
+    if v is None:
+        raise ValueError("v cannot be None")
+
+    return u.x * v.x + u.y * v.y + u.z * v.z
 
 
-def cross_product(v1: Vec3D, v2: Vec3D) -> Vec3D:
+def cross_product(u: Vec3D, v: Vec3D) -> Vec3D:
     """
     Calculates the cross product of two 3 dimensional vectors.
-    :param v1: First vector
-    :param v2: Second vector
+    :param u: First vector
+    :param v: Second vector
     :return: Cross product of the two vectors
     """
+    if u is None:
+        raise ValueError("u cannot be None")
+
+    if v is None:
+        raise ValueError("v cannot be None")
+
     return Vec3D(
-        v1.y * v2.z - v1.z * v2.y,
-        v1.z * v2.x - v1.x * v2.z,
-        v1.x * v2.y - v1.y * v2.x,
+        u.y * v.z - u.z * v.y,
+        u.z * v.x - u.x * v.z,
+        u.x * v.y - u.y * v.x,
     )
 
 
@@ -55,7 +78,10 @@ def norm(v: Vec3D) -> float:
     :param v: Vector
     :return: Norm of the vector
     """
-    return (v.x**2 + v.y**2 + v.z**2) ** 0.5
+    if v is None:
+        raise ValueError("v cannot be None")
+
+    return math.sqrt(v.x**2 + v.y**2 + v.z**2)
 
 
 def normalize(v: Vec3D) -> Vec3D:
