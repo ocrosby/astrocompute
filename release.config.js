@@ -1,6 +1,6 @@
 module.exports = {
   branches: ["main"],
-  repositoryUrl: "https://github.com/TheWeatherCompany/sun-qa-python-tools",
+  repositoryUrl: "https://github.com/ocrosby/astrocompute",
   upload_to_pyPI: false,
   plugins: [
     "@semantic-release/commit-analyzer",
