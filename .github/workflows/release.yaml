@@ -94,6 +94,7 @@ jobs:
           TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
         run: |
             echo "Deploying to PyPI..."
-            source venv/bin/activate            
+            source venv/bin/activate 
+            invoke build
             python3 -m twine upload --repository pypi dist/*
         shell: bash
