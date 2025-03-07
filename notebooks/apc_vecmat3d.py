@@ -13,9 +13,9 @@ def _():
 
 @app.cell
 def _():
-    from astrocompute.library.apc_vecmat3d import Vec3D
+    from astrocompute.library.vector3d import Vector3D
 
-    return (Vec3D,)
+    return (Vector3D,)
 
 
 @app.cell
