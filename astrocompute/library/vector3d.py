@@ -2,6 +2,7 @@ import math
 
 from astrocompute.models.vector import Vector3D
 
+
 def add(u: Vector3D, v: Vector3D) -> Vector3D:
     """
     Adds two 3-dimensional vectors.

@@ -23,7 +23,7 @@ name = "Omar Crosby"
 text = "MIT"
 
 [project.optional-dependencies]
-dev = [ "pytest", "pytest-mock", "pytest-cov", "coverage", "pytest-bdd", "black", "flake8", "isort", "mypy", "pylint", "radon", "marimo",]
+dev = [ "pytest", "pytest-mock", "pytest-cov", "coverage", "pytest-bdd", "black", "flake8", "isort", "mypy", "pylint", "radon", "marimo", "sphinx", "sphinx_rtd_theme", "sphinx-autodoc-typehints"]
 
 [project.urls]
 Homepage = "https://github.com/ocrosby/astrocompute"

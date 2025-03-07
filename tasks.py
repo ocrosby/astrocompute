@@ -5,6 +5,7 @@ Invoke build tasks for the astrocompute project.
 import os
 import re
 import sys
+import shutil
 from typing import Dict, Optional
 
 from invoke import Context, task
@@ -265,3 +266,29 @@ def parse_radon_output(output: str) -> Dict[Optional[str], any]:
             print(e)
 
     return results
+
+
+@task(name="build_docs", aliases=["bd"])
+def build_docs(c):
+    """Build the Sphinx documentation."""
+    docs_dir = os.path.join(os.path.dirname(__file__), "docs")
+    build_dir = os.path.join(docs_dir, "build")
+    source_dir = os.path.join(docs_dir, "source")
+    module_dir = os.path.join(os.path.dirname(__file__), "astrocompute")
+
+    # Clean up the previously generated .rst files, excluding index.rst
+    for filename in os.listdir(source_dir):
+        if filename.endswith(".rst") and filename != "index.rst":
+            file_path = os.path.join(source_dir, filename)
+            if os.path.isfile(file_path) or os.path.islink(file_path):
+                os.unlink(file_path)
+            elif os.path.isdir(file_path):
+                shutil.rmtree(file_path)
+
+    # Clean up the build directory
+    c.run(f"rm -rf {build_dir}/*")
+    # Generate reStructuredText files from the source code
+    c.run(f"sphinx-apidoc -o {source_dir} {module_dir}")
+
+    # Build the HTML documentation
+    c.run(f"sphinx-build -b html {source_dir} {build_dir}")

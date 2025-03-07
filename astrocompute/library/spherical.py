@@ -2,6 +2,7 @@ import math
 
 from astrocompute.models.spherical import Spherical
 
+
 def to_cartesian(s: Spherical) -> tuple:
     """
     Converts spherical coordinates to Cartesian coordinates.
@@ -13,6 +14,7 @@ def to_cartesian(s: Spherical) -> tuple:
     y = s.r * math.sin(s.theta) * math.sin(s.phi)
     z = s.r * math.cos(s.theta)
     return (x, y, z)
+
 
 def from_cartesian(x: float, y: float, z: float) -> Spherical:
     """
@@ -27,6 +29,7 @@ def from_cartesian(x: float, y: float, z: float) -> Spherical:
     theta = math.acos(z / r)
     phi = math.atan2(y, x)
     return Spherical(r, theta, phi)
+
 
 def add(s1: Spherical, s2: Spherical) -> Spherical:
     """
@@ -43,6 +46,7 @@ def add(s1: Spherical, s2: Spherical) -> Spherical:
     z_sum = z1 + z2
     return from_cartesian(x_sum, y_sum, z_sum)
 
+
 def subtract(s1: Spherical, s2: Spherical) -> Spherical:
     """
     Subtracts the second spherical coordinate from the first.
@@ -58,6 +62,7 @@ def subtract(s1: Spherical, s2: Spherical) -> Spherical:
     z_diff = z1 - z2
     return from_cartesian(x_diff, y_diff, z_diff)
 
+
 def multiply(s: Spherical, scalar: float) -> Spherical:
     """
     Multiplies a spherical coordinate by a scalar.
@@ -67,6 +72,7 @@ def multiply(s: Spherical, scalar: float) -> Spherical:
     :return: Result of the scalar multiplication
     """
     return Spherical(s.r * scalar, s.theta, s.phi)
+
 
 def rotate(s: Spherical, dtheta: float, dphi: float) -> Spherical:
     """

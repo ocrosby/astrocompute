@@ -21,6 +21,7 @@ class Angle:
     def set(self, angle_format: AngleFormat):
         self.format = angle_format
 
+
 class AngleSerializer:
     """
     AngleSerializer class to serialize and deserialize angles

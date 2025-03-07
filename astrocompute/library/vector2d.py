@@ -2,6 +2,7 @@ import math
 
 from astrocompute.models.vector import Vector2D
 
+
 def add(u: Vector2D, v: Vector2D) -> Vector2D:
     """
     Adds two 2-dimensional vectors.
@@ -18,6 +19,7 @@ def add(u: Vector2D, v: Vector2D) -> Vector2D:
 
     return Vector2D(u.x + v.x, u.y + v.y)
 
+
 def scalar_multiply(s: float, v: Vector2D) -> Vector2D:
     """
     Multiplies a 2-dimensional vector by a scalar.
@@ -30,6 +32,7 @@ def scalar_multiply(s: float, v: Vector2D) -> Vector2D:
         raise ValueError("vector cannot be None")
 
     return Vector2D(s * v.x, s * v.y)
+
 
 def dot_product(u: Vector2D, v: Vector2D) -> float:
     """
@@ -47,6 +50,7 @@ def dot_product(u: Vector2D, v: Vector2D) -> float:
 
     return u.x * v.x + u.y * v.y
 
+
 def norm(v: Vector2D) -> float:
     """
     Calculates the norm of a 2-dimensional vector.
@@ -58,6 +62,7 @@ def norm(v: Vector2D) -> float:
         raise ValueError("v cannot be None")
 
     return math.sqrt(v.x**2 + v.y**2)
+
 
 def normalize(v: Vector2D) -> Vector2D:
     """

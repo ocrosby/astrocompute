@@ -2,6 +2,7 @@ import math
 
 from astrocompute.models.polar import Polar
 
+
 def to_cartesian(p: Polar) -> tuple:
     """
     Converts polar coordinates to Cartesian coordinates.
@@ -12,6 +13,7 @@ def to_cartesian(p: Polar) -> tuple:
     x = p.r * math.cos(p.theta)
     y = p.r * math.sin(p.theta)
     return (x, y)
+
 
 def from_cartesian(x: float, y: float) -> Polar:
     """
@@ -24,6 +26,7 @@ def from_cartesian(x: float, y: float) -> Polar:
     r = math.sqrt(x**2 + y**2)
     theta = math.atan2(y, x)
     return Polar(r, theta)
+
 
 def add(p1: Polar, p2: Polar) -> Polar:
     """
@@ -39,6 +42,7 @@ def add(p1: Polar, p2: Polar) -> Polar:
     y_sum = y1 + y2
     return from_cartesian(x_sum, y_sum)
 
+
 def subtract(p1: Polar, p2: Polar) -> Polar:
     """
     Subtracts the second polar coordinate from the first.
@@ -53,6 +57,7 @@ def subtract(p1: Polar, p2: Polar) -> Polar:
     y_diff = y1 - y2
     return from_cartesian(x_diff, y_diff)
 
+
 def multiply(p: Polar, scalar: float) -> Polar:
     """
     Multiplies a polar coordinate by a scalar.
@@ -62,6 +67,7 @@ def multiply(p: Polar, scalar: float) -> Polar:
     :return: Result of the scalar multiplication
     """
     return Polar(p.r * scalar, p.theta)
+
 
 def rotate(p: Polar, angle: float) -> Polar:
     """

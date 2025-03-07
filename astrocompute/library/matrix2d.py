@@ -1,10 +1,12 @@
 from typing import List
 
+
 class Mat2D:
     def __init__(self, data: List[List[float]]):
         if len(data) != 2 or len(data[0]) != 2 or len(data[1]) != 2:
             raise ValueError("Mat2D must be a 2x2 matrix")
         self.data = data
+
 
 def add(m1: Mat2D, m2: Mat2D) -> Mat2D:
     """
@@ -14,10 +16,13 @@ def add(m1: Mat2D, m2: Mat2D) -> Mat2D:
     :param m2: Second matrix
     :return: The sum of the two matrices
     """
-    return Mat2D([
-        [m1.data[0][0] + m2.data[0][0], m1.data[0][1] + m2.data[0][1]],
-        [m1.data[1][0] + m2.data[1][0], m1.data[1][1] + m2.data[1][1]]
-    ])
+    return Mat2D(
+        [
+            [m1.data[0][0] + m2.data[0][0], m1.data[0][1] + m2.data[0][1]],
+            [m1.data[1][0] + m2.data[1][0], m1.data[1][1] + m2.data[1][1]],
+        ]
+    )
+
 
 def subtract(m1: Mat2D, m2: Mat2D) -> Mat2D:
     """
@@ -27,10 +32,13 @@ def subtract(m1: Mat2D, m2: Mat2D) -> Mat2D:
     :param m2: Second matrix
     :return: The difference of the two matrices
     """
-    return Mat2D([
-        [m1.data[0][0] - m2.data[0][0], m1.data[0][1] - m2.data[0][1]],
-        [m1.data[1][0] - m2.data[1][0], m1.data[1][1] - m2.data[1][1]]
-    ])
+    return Mat2D(
+        [
+            [m1.data[0][0] - m2.data[0][0], m1.data[0][1] - m2.data[0][1]],
+            [m1.data[1][0] - m2.data[1][0], m1.data[1][1] - m2.data[1][1]],
+        ]
+    )
+
 
 def multiply(m1: Mat2D, m2: Mat2D) -> Mat2D:
     """
@@ -40,16 +48,19 @@ def multiply(m1: Mat2D, m2: Mat2D) -> Mat2D:
     :param m2: Second matrix
     :return: The product of the two matrices
     """
-    return Mat2D([
+    return Mat2D(
         [
-            m1.data[0][0] * m2.data[0][0] + m1.data[0][1] * m2.data[1][0],
-            m1.data[0][0] * m2.data[0][1] + m1.data[0][1] * m2.data[1][1]
-        ],
-        [
-            m1.data[1][0] * m2.data[0][0] + m1.data[1][1] * m2.data[1][0],
-            m1.data[1][0] * m2.data[0][1] + m1.data[1][1] * m2.data[1][1]
+            [
+                m1.data[0][0] * m2.data[0][0] + m1.data[0][1] * m2.data[1][0],
+                m1.data[0][0] * m2.data[0][1] + m1.data[0][1] * m2.data[1][1],
+            ],
+            [
+                m1.data[1][0] * m2.data[0][0] + m1.data[1][1] * m2.data[1][0],
+                m1.data[1][0] * m2.data[0][1] + m1.data[1][1] * m2.data[1][1],
+            ],
         ]
-    ])
+    )
+
 
 def determinant(matrix: Mat2D) -> float:
     """
@@ -58,7 +69,11 @@ def determinant(matrix: Mat2D) -> float:
     :param matrix: The matrix
     :return: The determinant of the matrix
     """
-    return matrix.data[0][0] * matrix.data[1][1] - matrix.data[0][1] * matrix.data[1][0]
+    return (
+        matrix.data[0][0] * matrix.data[1][1]
+        - matrix.data[0][1] * matrix.data[1][0]
+    )
+
 
 def transpose(matrix: Mat2D) -> Mat2D:
     """
@@ -67,7 +82,9 @@ def transpose(matrix: Mat2D) -> Mat2D:
     :param matrix: The matrix
     :return: The transposed matrix
     """
-    return Mat2D([
-        [matrix.data[0][0], matrix.data[1][0]],
-        [matrix.data[0][1], matrix.data[1][1]]
-    ])
+    return Mat2D(
+        [
+            [matrix.data[0][0], matrix.data[1][0]],
+            [matrix.data[0][1], matrix.data[1][1]],
+        ]
+    )

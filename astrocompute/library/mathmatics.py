@@ -6,6 +6,7 @@ frac and modulo
 
 from typing import Tuple
 
+
 def frac(x: float) -> float:
     """
     Calculate the fractional part of x
