@@ -34,7 +34,7 @@ jobs:
             ${{ runner.os }}-node-          
 
       - name: Install ESLint
-        run: npm install
+        run: npm install --no-fund
 
       - name: Run ESLint
         run: npm run lint
@@ -60,7 +60,7 @@ jobs:
             ${{ runner.os }}-node-  
 
       - name: Install commitlint
-        run: npm install --save-dev @commitlint/{config-conventional,cli}
+        run: npm install --no-fund
 
       - name: Run commitlint
         run: git log -1 --pretty=%B | npx commitlint
@@ -154,3 +154,6 @@ jobs:
           source venv/bin/activate
           invoke test
         shell: bash
+
+      - name: Report Coverage
+        uses: coverallsapp/github-action@v2
