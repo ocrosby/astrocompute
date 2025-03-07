@@ -4,7 +4,7 @@
 [![Python Lint](https://github.com/ocrosby/astrocompute/actions/workflows/lint.yaml/badge.svg)](https://github.com/ocrosby/astrocompute/actions/workflows/lint.yaml)
 [![Test](https://github.com/ocrosby/astrocompute/actions/workflows/test.yaml/badge.svg)](https://github.com/ocrosby/astrocompute/actions/workflows/test.yaml)
 [![Coverage Status](https://coveralls.io/repos/github/ocrosby/astrocompute/badge.svg)](https://coveralls.io/github/ocrosby/astrocompute)
-[![Documentation Status](https://readthedocs.org/projects/astrocompute/badge/?version=latest)](https://astrocompute.readthedocs.io/en/latest/)
+[![Doc Status](https://readthedocs.org/projects/astrocompute/badge/?version=latest)](https://astrocompute.readthedocs.io/en/latest/)
 
 ## Description
 
