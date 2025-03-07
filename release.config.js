@@ -32,7 +32,7 @@ module.exports = {
           "VERSION",
           "docs/source/conf.py",
           "package.json",
-          "package-lock.json"
+          "package-lock.jso
         ],
         message: "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
       }
