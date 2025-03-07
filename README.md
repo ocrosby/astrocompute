@@ -4,6 +4,7 @@
 [![Python Lint](https://github.com/ocrosby/astrocompute/actions/workflows/lint.yaml/badge.svg)](https://github.com/ocrosby/astrocompute/actions/workflows/lint.yaml)
 [![Test](https://github.com/ocrosby/astrocompute/actions/workflows/test.yaml/badge.svg)](https://github.com/ocrosby/astrocompute/actions/workflows/test.yaml)
 [![Coverage Status](https://coveralls.io/repos/github/ocrosby/astrocompute/badge.svg)](https://coveralls.io/github/ocrosby/astrocompute)
+[![Documentation Status](https://readthedocs.org/projects/astrocompute/badge/?version=latest)](https://astrocompute.readthedocs.io/en/latest/)
 
 ## Description
 
@@ -33,6 +34,9 @@ Please read our [Code of Conduct](CODE_OF_CONDUCT.md) before contributing.
 
 ## References
 
+- [PyPi](https://pypi.org/project/astrocompute/)
+- [GitHub](https://github.com/ocrosby/astrocompute)
+- [ReadTheDocs](https://astrocompute.readthedocs.io/en/latest/modules.html)
 - [Semantic Versioning 2.0](https://semver.org/)
 - [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
 - [Commitlint](https://commitlint.js.org/)
