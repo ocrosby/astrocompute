@@ -10,6 +10,19 @@ class AngleFormat(Enum):
     DMMSSs = "DMMSSs"  # pylint: disable=invalid-name
 
 
+def dms(alpha: float):
+    """
+    Convert an angle in decimal degrees to degrees, minutes, and seconds
+
+    :param alpha:
+    :return:
+    """
+    d = int(alpha)
+    m = int((alpha - d) * 60)
+    s = ((alpha - d) * 60 - m) * 60
+    return d, m, s
+
+
 @dataclass
 class Angle:
     def __init__(

@@ -62,17 +62,14 @@ def multiply(m1: Mat2D, m2: Mat2D) -> Mat2D:
     )
 
 
-def determinant(matrix: Mat2D) -> float:
+def determinant(mat: Mat2D) -> float:
     """
     Calculates the determinant of the 2x2 matrix.
 
-    :param matrix: The matrix
+    :param mat: The matrix
     :return: The determinant of the matrix
     """
-    return (
-        matrix.data[0][0] * matrix.data[1][1]
-        - matrix.data[0][1] * matrix.data[1][0]
-    )
+    return mat.data[0][0] * mat.data[1][1] - mat.data[0][1] * mat.data[1][0]
 
 
 def transpose(matrix: Mat2D) -> Mat2D:

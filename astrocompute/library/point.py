@@ -30,7 +30,7 @@ def _validate_points(*points: "Point2D") -> None:
     :param points: A variable number of points
     :raises: ValueError if any of the points are None
     """
-    none_points = [f"p{i+1}" for i, point in enumerate(points) if point is None]
+    none_points = [f"p{i + 1}" for i, p in enumerate(points) if p is None]
     if none_points:
         raise ValueError(f"{', '.join(none_points)} cannot be None")
 
@@ -249,8 +249,8 @@ class Point2D:
         """
         _validate_points(p, q)
 
-        delta_x = Point2D.dx(q, p)
-        delta_y = Point2D.dy(q, p)
+        delta_x = Point2D.dx(p, q)
+        delta_y = Point2D.dy(p, q)
 
         return delta_x == 0 and delta_y != 0
 
@@ -265,8 +265,8 @@ class Point2D:
         """
         _validate_points(p, q)
 
-        delta_x = Point2D.dx(q, p)
-        delta_y = Point2D.dy(q, p)
+        delta_x = Point2D.dx(p, q)
+        delta_y = Point2D.dy(p, q)
 
         return delta_y == 0 and delta_x != 0
 
@@ -395,12 +395,8 @@ class Point3D:
         raise ValueError(f"Invalid Point3D representation: {repr_str}")
 
     @staticmethod
-    def distance(point1: "Point3D", point2: "Point3D") -> float:
-        return math.sqrt(
-            (point2.x - point1.x) ** 2
-            + (point2.y - point1.y) ** 2
-            + (point2.z - point1.z) ** 2
-        )
+    def distance(p: "Point3D", q: "Point3D") -> float:
+        return math.sqrt((q.x - p.x) ** 2 + (q.y - p.y) ** 2 + (q.z - p.z) ** 2)
 
     @staticmethod
     def midpoint(p: "Point3D", q: "Point3D") -> "Point3D":

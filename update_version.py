@@ -5,18 +5,26 @@ Usage:
     python update_version.py <version>
 """
 
-import sys
-import toml
+import argparse
 import json
 import logging
+import sys
 from pathlib import Path
-from typing import Callable, Any
-import argparse
+from typing import Any, Callable
+
+import toml
 
 # Configure logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
+)
 
-def update_file(file_path: Path, read_func: Callable[[Any], Any], write_func: Callable[[Any, Any], None]) -> None:
+
+def update_file(
+    file_path: Path,
+    read_func: Callable[[Any], Any],
+    write_func: Callable[[Any, Any], None],
+) -> None:
     """
     Reads the content of a file, updates it, and writes it back.
 
@@ -37,6 +45,7 @@ def update_file(file_path: Path, read_func: Callable[[Any], Any], write_func: Ca
     except Exception as e:
         logging.error(f"Error updating {file_path}: {e}")
 
+
 def update_version_in_pyproject_toml(version: str) -> None:
     """
     Updates the version in `pyproject.toml`.
@@ -47,6 +56,7 @@ def update_version_in_pyproject_toml(version: str) -> None:
     Returns:
         None
     """
+
     def read_func(file):
         return toml.load(file)
 
@@ -55,6 +65,7 @@ def update_version_in_pyproject_toml(version: str) -> None:
         toml.dump(content, file)
 
     update_file(Path("pyproject.toml"), read_func, write_func)
+
 
 def update_version_in_version_txt(version: str) -> None:
     """
@@ -66,6 +77,7 @@ def update_version_in_version_txt(version: str) -> None:
     Returns:
         None
     """
+
     def read_func(file):
         return file.read()
 
@@ -73,6 +85,7 @@ def update_version_in_version_txt(version: str) -> None:
         file.write(version)
 
     update_file(Path("VERSION"), read_func, write_func)
+
 
 def update_version_in_conf_py(version: str) -> None:
     """
@@ -84,6 +97,7 @@ def update_version_in_conf_py(version: str) -> None:
     Returns:
         None
     """
+
     def read_func(file):
         return file.readlines()
 
@@ -96,6 +110,7 @@ def update_version_in_conf_py(version: str) -> None:
 
     update_file(Path("docs/source/conf.py"), read_func, write_func)
 
+
 def update_version_in_json(file_path: Path, version: str) -> None:
     """
     Updates the version in a JSON file.
@@ -107,6 +122,7 @@ def update_version_in_json(file_path: Path, version: str) -> None:
     Returns:
         None
     """
+
     def read_func(file):
         return json.load(file)
 
@@ -117,8 +133,11 @@ def update_version_in_json(file_path: Path, version: str) -> None:
 
     update_file(file_path, read_func, write_func)
 
+
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Update version in various files.")
+    parser = argparse.ArgumentParser(
+        description="Update version in various files."
+    )
     parser.add_argument("version", type=str, help="The new version to set")
     args = parser.parse_args()
 
@@ -126,8 +145,12 @@ if __name__ == "__main__":
         Path("pyproject.toml"): update_version_in_pyproject_toml,
         Path("VERSION"): update_version_in_version_txt,
         Path("docs/source/conf.py"): update_version_in_conf_py,
-        Path("package.json"): lambda v: update_version_in_json(Path("package.json"), v),
-        Path("package-lock.json"): lambda v: update_version_in_json(Path("package-lock.json"), v),
+        Path("package.json"): lambda v: update_version_in_json(
+            Path("package.json"), v
+        ),
+        Path("package-lock.json"): lambda v: update_version_in_json(
+            Path("package-lock.json"), v
+        ),
     }
 
     for file_path, update_func in files_to_update.items():
