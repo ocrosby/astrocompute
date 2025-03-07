@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/ocrosby/astrocompute/compare/v1.0.2...v1.0.3) (2025-03-07)
+
+
+### Bug Fixes
+
+* trigger release ([d81fbbd](https://github.com/ocrosby/astrocompute/commit/d81fbbd07f2a000d2f50f375b3eab6f5f0897c94))
+
 ## [1.0.2](https://github.com/ocrosby/astrocompute/compare/v1.0.1...v1.0.2) (2025-03-06)
 
 

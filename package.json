@@ -1,6 +1,6 @@
 {
   "name": "astrocompute",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "A general purpose package for astronomy calculations.",
   "main": "index.js",
   "scripts": {
