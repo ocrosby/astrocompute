@@ -32,6 +32,9 @@ jobs:
       - name: Run ESLint
         run: npm run lint
 
+      - name: Configure Git Safe Directory
+        run: git config --global --add safe.directory /__w/astrocompute/astrocompute
+
       - name: Run CommitLint
         run: git log -1 --pretty=%B | npx commitlint
 
