@@ -5,8 +5,6 @@ from astrocompute.models import (
     Point3D,
     Polar,
     Spherical,
-    Vector2D,
-    Vector3D,
 )
 
 
