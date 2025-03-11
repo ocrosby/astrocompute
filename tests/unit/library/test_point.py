@@ -119,6 +119,27 @@ def test_same_point_invalid(
 
 
 @pytest.mark.parametrize(
+    "p, q, r, s, expected_answer",
+    [
+        (Point2D(0, 0), Point2D(0, 0), Point2D(0, 0), Point2D(0, 0), False),
+        (Point2D(0, 0), Point2D(1, 1), Point2D(0, 0), Point2D(1, 1), True),
+        (Point2D(0, 0), Point2D(1, 1), Point2D(0, 0), Point2D(1, 2), False),
+    ]
+)
+def test_same_line(
+        p: Point2D,
+        q: Point2D,
+        r: Point2D,
+        s: Point2D,
+        expected_answer: bool) -> None:
+    # Act
+    actual_answer = Point2D.same_line(p, q, r, s)
+
+    # Assert
+    assert actual_answer == expected_answer, f"Expected {expected_answer}, Actual: {actual_answer}"
+
+
+@pytest.mark.parametrize(
     "input_str, expected",
     [
         ("Point2D(x=1, y=2, name=None)", Point2D(1, 2)),

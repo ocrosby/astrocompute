@@ -114,6 +114,9 @@ class Point2D:
         """
         _validate_points(p, q, r, s)
 
+        if Point2D.same_point(p, q) or Point2D.same_point(r, s):
+            return False
+
         if not Point2D.are_collinear(p, q, r):
             return False
 
