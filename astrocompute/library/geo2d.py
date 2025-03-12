@@ -71,34 +71,34 @@ class Point:
         Returns:
             Point: A new Point instance.
         """
-        return Point.parse(item)
+        return parse(item)
 
-    @staticmethod
-    def parse(repr_str: str) -> "Point":
-        """
-        Parses a string representation to create a Point instance.
 
-        Args:
-            repr_str (str): The string representation of the point.
+def parse(repr_str: str) -> "Point":
+    """
+    Parses a string representation to create a Point instance.
 
-        Returns:
-            Point: A new Point instance.
+    Args:
+        repr_str (str): The string representation of the point.
 
-        Raises:
-            ValueError: If the string representation is invalid.
-        """
-        match = re.match(r"Point\(x=(.*), y=(.*)\)|\((.*), (.*)\)", repr_str)
+    Returns:
+        Point: A new Point instance.
 
-        if not match:
-            raise ValueError(f"Invalid Point representation: {repr_str}")
+    Raises:
+        ValueError: If the string representation is invalid.
+    """
+    match = re.match(r"Point\(x=(.*), y=(.*)\)|\((.*), (.*)\)", repr_str)
 
-        if match.groups()[0]:
-            x, y = match.groups()[:2]
-            x, y = float(x), float(y)
-        else:
-            x, y = map(float, match.groups()[2:])
+    if not match:
+        raise ValueError(f"Invalid Point representation: {repr_str}")
 
-        return Point(x, y)
+    if match.groups()[0]:
+        x, y = match.groups()[:2]
+        x, y = float(x), float(y)
+    else:
+        x, y = map(float, match.groups()[2:])
+
+    return Point(x, y)
 
 # Define the type for the metric
 Metric = Callable[[float, float, float, float], float]

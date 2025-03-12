@@ -12,6 +12,7 @@ from astrocompute.library.geo2d import (
     is_degenerate,
     is_horizontal,
     is_vertical,
+    parse,
     slope,
     taxicab_metric,
 )
@@ -436,9 +437,9 @@ def test_taxicab_metric(x1, y1, x2, y2, expected):
         ("Point(x=0, y=0)", Point(0, 0)),
     ],
 )
-def test_point_parse(input_str, expected):
+def test_parse(input_str, expected):
     # Act
-    actual = Point.parse(input_str)
+    actual = parse(input_str)
 
     # Assert
     assert actual == expected
@@ -490,10 +491,10 @@ def test_point_from_string(input_str: str, expected: Point):
         "Point(x=1, y=2",
     ],
 )
-def test_point_parse_invalid(input_str: str):
+def test_parse_invalid(input_str: str):
     print(f"Testing input: {input_str}")
     with pytest.raises(ValueError):
-        Point.parse(input_str)
+        parse(input_str)
 
 
 @pytest.mark.parametrize(
