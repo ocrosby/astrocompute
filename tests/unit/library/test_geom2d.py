@@ -2,7 +2,7 @@ import math
 
 import pytest
 
-from astrocompute.library.geo2d import (
+from astrocompute.library.geom2d import (
     LineSegment,
     Point,
     are_collinear,
