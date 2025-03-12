@@ -35,43 +35,35 @@ class Angle:
         self.format = angle_format
 
 
-class AngleSerializer:
+def angle_to_string(
+        alpha: float,
+        angle_format: AngleFormat,
+        precision: int = 2,
+        width: int = 12) -> str:
     """
-    AngleSerializer class to serialize and deserialize angles
+    Convert an angle to a string representation
+
+    :param alpha: The angle in decimal degrees
+    :param angle_format: The format of the angle
+    :param precision: The precision of the angle representation
+    :param width: The width of the resulting string
+    :return: The string representation of the angle
     """
+    d, m, s = dms(alpha)
+    if angle_format == AngleFormat.Dd:
+        return f"{alpha:0.{precision}f}".rjust(width)
 
-    def __init__(self, precision: int = 2, width: int = 12):
-        """
-        Initialize the AngleSerializer
+    if angle_format == AngleFormat.DMM:
+        return f"{d} {m:02d}".rjust(width)
 
-        :param precision:
-        :param width:
-        """
-        self.precision = precision
-        self.width = width
+    if angle_format == AngleFormat.DMMm:
+        decimal_minutes = m + s / 60
+        return f"{d} {decimal_minutes:0.{precision}f}".rjust(width)
 
-    def serialize(self, angle: Angle) -> str:
-        """
-        Serialize an angle to a string
+    if angle_format == AngleFormat.DMMSS:
+        return f"{d} {m:02d} {int(s):02d}".rjust(width)
 
-        :param angle:
-        :return:
-        """
-        d, m, s = dms(angle.alpha)
-        if angle.format == AngleFormat.Dd:
-            return f"{angle.alpha:0.{self.precision}f}"
+    if angle_format == AngleFormat.DMMSSs:
+        return f"{d} {m:02d} {s:0.{precision}f}".rjust(width)
 
-        if angle.format == AngleFormat.DMM:
-            return f"{d} {m:02d}"
-
-        if angle.format == AngleFormat.DMMm:
-            decimal_minutes = m + s / 60
-            return f"{d} {decimal_minutes:0.{self.precision}f}"
-
-        if angle.format == AngleFormat.DMMSS:
-            return f"{d} {m:02d} {int(s):02d}"
-
-        if angle.format == AngleFormat.DMMSSs:
-            return f"{d} {m:02d} {s:0.{self.precision}f}"
-
-        raise ValueError("Invalid AngleFormat")
+    raise ValueError("Invalid AngleFormat")

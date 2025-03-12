@@ -15,6 +15,8 @@ from astrocompute.library.geom2d import (
     parse,
     slope,
     taxicab_metric,
+    rectangular_to_polar,
+    polar_to_rectangular,
 )
 
 
@@ -512,3 +514,43 @@ def test_are_parallel(x1, y1, x2, y2, x3, y3, x4, y4, expected):
 
     # Assert
     assert actual == expected, f"Expected: {expected}, Actual: {actual}"
+
+
+@pytest.mark.parametrize(
+    "x, y, r, theta",
+    [
+        (0, 0, 0, 0),
+        (1, 0, 1, 0),
+        (0, 1, 1, math.pi / 2),
+        (-1, 0, 1, math.pi),
+        (0, -1, 1, 3 * math.pi / 2),
+        (1, 1, math.sqrt(2), math.pi / 4),
+    ],
+)
+def test_rectangular_to_polar(x, y, r, theta):
+    # Act
+    r, theta = rectangular_to_polar(x, y)
+
+    # Assert
+    assert r == pytest.approx(r), f"Expected: {r}, Actual: {r}"
+    assert theta == pytest.approx(theta), f"Expected: {theta}, Actual: {theta}"
+
+
+@pytest.mark.parametrize(
+    "r, theta, x, y",
+    [
+        (0, 0, 0, 0),
+        (1, 0, 1, 0),
+        (1, math.pi / 2, 0, 1),
+        (1, math.pi, -1, 0),
+        (1, 3 * math.pi / 2, 0, -1),
+        (math.sqrt(2), math.pi / 4, 1, 1),
+    ],
+)
+def test_polar_to_rectangular(r, theta, x, y):
+    # Act
+    x, y = polar_to_rectangular(r, theta)
+
+    # Assert
+    assert x == pytest.approx(x), f"Expected: {x}, Actual: {x}"
+    assert y == pytest.approx(y), f"Expected: {y}, Actual: {y}"
