@@ -1,7 +1,7 @@
 import math
 import re
 from dataclasses import dataclass, field
-from typing import Callable, Tuple, SupportsFloat
+from typing import Callable, Tuple
 
 
 @dataclass

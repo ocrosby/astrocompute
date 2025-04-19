@@ -36,10 +36,8 @@ class Angle:
 
 
 def angle_to_string(
-        alpha: float,
-        angle_format: AngleFormat,
-        precision: int = 2,
-        width: int = 12) -> str:
+    alpha: float, angle_format: AngleFormat, precision: int = 2, width: int = 12
+) -> str:
     """
     Convert an angle to a string representation
 
