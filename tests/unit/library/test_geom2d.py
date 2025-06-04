@@ -13,10 +13,10 @@ from astrocompute.library.geom2d import (
     is_horizontal,
     is_vertical,
     parse,
+    polar_to_rectangular,
+    rectangular_to_polar,
     slope,
     taxicab_metric,
-    rectangular_to_polar,
-    polar_to_rectangular,
 )
 
 
